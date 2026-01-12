@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pymongo
+python-dotenv
+passlib[argon2]
+pyjwt
+email-validator
+langchain
+pymupdf
+langchain-google-genai
+pypdf
+langchain-text-splitters
+langchain-community
+python-multipart
+langchain-groq

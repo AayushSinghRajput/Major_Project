@@ -1,0 +1,22 @@
+# Ignore env file inside backend
+backend/.env
+
+# Ignore python cache
+backend/__pycache__/
+backend/*.pyc
+
+# Ignore virtual environment
+backend/myenv/
+
+
+# Env files
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+myenv/
+venv/
+.env/
