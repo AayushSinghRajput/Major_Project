@@ -1,0 +1,219 @@
+[
+  {
+    "day1": {
+      "chapter1": {
+        "title": "Biology - The Life Science",
+        "subtopics": {
+          "Subtopic1.1": {
+            "title": "Characteristics of life",
+            "content": "## Chapter 2: The Life Science - 2.1 Characteristics of Life\n\nThis section covers the fundamental characteristics that define what it means to be alive. Understanding these characteristics is crucial for differentiating living organisms from non-living things.\n\n### What is Life? The Defining Characteristics\n\nLiving organisms share a set of common characteristics that distinguish them from non-living matter. These characteristics are not always absolute (viruses, for instance, are debatable), but they provide a useful framework for understanding life.\n\n*1. Organization (Order)\n\n   *Definition:* Living things exhibit a high degree of organization, from the molecular level (atoms to molecules) to the macroscopic level (cells to organisms to ecosystems).\n*   *Example:* A leaf is organized from cells (like palisade and spongy mesophyll cells) working together. These cells contain organelles (like chloroplasts) which contain organized molecules (like chlorophyll).\n*   *Key Point:* This organization is not random; there's a specific structure and function at each level.\n\n*2. Reproduction\n\n   *Definition:* Living organisms can reproduce, creating new organisms similar to themselves. This can be sexual (involving two parents and genetic variation) or asexual (involving one parent and identical offspring).\n*   *Examples:\n    *   *Sexual Reproduction: Humans reproduce sexually, combining genetic material from both parents.\n    *   Asexual Reproduction: Bacteria reproduce asexually through binary fission.\n*   *Key Point:* Reproduction ensures the continuation of a species.\n\n*3. Growth and Development\n\n   *Definition:* Living organisms grow (increase in size or number of cells) and develop (undergo changes and maturation over time).\n*   *Examples:\n    *   *Growth: A baby growing into an adult.\n    *   Development: A caterpillar transforming into a butterfly (metamorphosis).\n*   *Key Point:* Growth and development are genetically controlled and often involve cell differentiation.\n\n*4. Response to Stimuli (Sensitivity)\n\n   *Definition:* Living organisms respond to changes in their environment (stimuli). These responses can be simple or complex.\n*   *Examples:\n    *   A plant bending towards sunlight (phototropism).\n    *   A human sweating in response to heat.\n   *Key Point:* This responsiveness is crucial for survival, allowing organisms to adapt and avoid danger.\n\n*5. Homeostasis (Regulation)\n\n   *Definition:* Living organisms maintain a relatively stable internal environment despite changes in the external environment. This includes regulating temperature, pH, water balance, and other factors.\n*   *Examples:\n    *   The human body maintaining a constant body temperature of around 37°C.\n    *   Plants regulating water loss through their stomata.\n   *Key Point:* Maintaining homeostasis is essential for the proper functioning of cells and overall survival.\n\n*6. Energy Processing (Metabolism)\n\n   *Definition:* Living organisms use energy to power their activities. This involves a complex set of chemical reactions collectively known as metabolism. Organisms either produce their own energy (autotrophs) or consume energy from other organisms (heterotrophs).\n*   *Examples:\n    *   *Autotrophs: Plants perform photosynthesis to convert sunlight into chemical energy (glucose).\n    *   Heterotrophs: Animals eat plants or other animals to obtain energy.\n*   *Key Point:* Metabolism includes both breaking down molecules (catabolism) and building up molecules (anabolism).\n\n*7. Evolution (Adaptation)\n\n   *Definition:* Over generations, populations of living organisms evolve, or change, in response to their environment. This evolution is driven by natural selection, where individuals with advantageous traits are more likely to survive and reproduce.\n*   *Examples:\n    *   The evolution of antibiotic resistance in bacteria.\n    *   The development of camouflage in animals.\n   *Key Point:* Evolution is the process that explains the diversity of life on Earth.\n\n*Summary Table:*\n\n| Characteristic    | Definition                                                                 | Example                                         | Significance                                                                   |\n|--------------------|----------------------------------------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------------|\n| Organization       | Highly structured arrangement of components                                | Cells forming tissues, tissues forming organs     | Efficient functioning and specialization of tasks                                |\n| Reproduction        | Ability to create new organisms similar to themselves                   | Bacteria dividing, animals mating                 | Continuation of the species and genetic diversity                               |\n| Growth & Development| Increase in size and maturation over time                                  | A seed growing into a plant, a tadpole becoming a frog | Maturation, adaptation to the environment, and efficient resource utilization |\n| Response to Stimuli | Reaction to changes in the environment                                     | Plant bending towards light, shivering in the cold | Survival by avoiding harm and seeking resources                                   |\n| Homeostasis         | Maintaining a stable internal environment                                 | Regulating body temperature, blood sugar levels     | Optimal conditions for cell function and survival                                |\n| Energy Processing   | Utilizing energy to power life processes                                      | Photosynthesis in plants, digestion in animals     | Fueling growth, repair, and other essential activities                            |\n| Evolution           | Change in the genetic makeup of a population over time                      | Development of antibiotic resistance in bacteria   | Adaptation to changing environments and diversification of life                    |\n\nBy understanding these seven characteristics, you can better understand the fundamental nature of life and distinguish living organisms from non-living entities. Remember that these characteristics often interact and are interconnected."
+       
+          },
+          "Subtopic1.2": {
+            "title": "Nature of science",
+            "content": "## Chapter 2 Biology - The Life Science\n## Topic 2.2: Nature of Science\n\nThis section explains what science is and how scientists explore the natural world. Understanding the nature of science is crucial for understanding biology itself.\n\n### What is Science?\n\n*   *Definition:* Science is a process of systematically gathering knowledge about the natural world through observation and experimentation. It's not just a collection of facts, but a way of thinking and investigating.\n*   *Goal:* The primary goal of science is to understand the universe around us, explain natural phenomena, and make predictions about future events.\n*   *Key Characteristics:\n    *   **Based on Evidence:* Scientific knowledge is built on empirical evidence – data collected through observations and experiments.\n    *   *Testable:* Scientific ideas must be testable through experiments or observations. If an idea can't be tested, it's not scientific.\n    *   *Falsifiable:* Scientific ideas must be potentially disproven. If no amount of evidence could ever disprove an idea, it is not scientific.\n    *   *Objective:* Scientists strive to minimize bias in their research and interpretations.\n    *   *Self-Correcting:* Science is constantly evolving as new evidence emerges and old ideas are revised or rejected.\n\n### The Scientific Method\n\nThe scientific method is a structured approach to scientific inquiry. It involves a series of steps:\n\n1.  *Observation:* Notice something interesting or unexplained.\n    *   *Example:* Observing that some plants grow taller than others.\n\n2.  *Question:* Formulate a question about your observation.\n    *   *Example:* Why do some plants grow taller than others?\n\n3.  *Hypothesis:* Propose a possible explanation or answer to your question. A hypothesis is a testable prediction.\n    *   *Example:* Plants grow taller when they receive more sunlight.\n\n4.  *Experiment:* Design and conduct a controlled experiment to test your hypothesis. A controlled experiment involves manipulating one variable (the independent variable) while keeping other variables constant (controlled variables).  You then measure the effect of the manipulated variable on another variable (the dependent variable). A control group is included for comparison.\n    *   *Example:*  Plant several identical plants.  Give some plants 8 hours of sunlight daily (experimental group) and others 4 hours of sunlight daily (control group). Make sure all other factors (water, soil, temperature) are the same for all plants. Measure the height of each plant after a week.\n    *   *Independent Variable:* Amount of sunlight\n    *   *Dependent Variable:* Plant height\n    *   *Controlled Variables:* Type of plant, amount of water, type of soil, temperature\n\n5.  *Analysis:* Analyze the data collected from the experiment. Look for patterns and relationships.\n    *   *Example:*  Calculate the average height of plants in each group and compare the results.\n\n6.  *Conclusion:* Based on the analysis, decide whether the data supports or refutes your hypothesis.\n    *   *Example:* If plants receiving more sunlight are significantly taller, the data supports the hypothesis. If there is no significant difference, the data does not support the hypothesis.\n    *   *Important Note:*  Science rarely \"proves\" anything absolutely. Experiments either support or fail to support a hypothesis.\n\n7.  *Communication:* Share your findings with the scientific community through publications, presentations, etc. This allows others to review and build upon your work.\n\n### Scientific Theories vs. Scientific Laws\n\nIt's important to distinguish between scientific theories and scientific laws:\n\n*   *Scientific Law:* A descriptive generalization about how some aspect of the natural world behaves under stated circumstances. Often expressed as a mathematical equation. Laws describe what happens.\n    *   *Example:* Law of Gravity – Describes the attraction between objects with mass.\n\n*   *Scientific Theory:* A well-substantiated explanation of some aspect of the natural world that can incorporate facts, laws, inferences, and tested hypotheses. Theories explain why something happens. They are broader in scope than laws.\n    *   *Example:* The Theory of Evolution by Natural Selection – Explains how life on Earth changes over time through the mechanism of natural selection. It explains why different species exist and how they are related.\n\n*Key Points:\n\n   Theories are not \"guesses\" or \"hunches.\" They are well-supported explanations.\n*   Theories can be modified or replaced as new evidence emerges.\n\n### Limitations of Science\n\nWhile powerful, science has limitations:\n\n*   *Cannot Address the Supernatural:* Science deals with the natural world and cannot provide answers to questions about the supernatural, religion, ethics, or morality.\n*   *Human Error:* Scientists are human and can make mistakes in their observations, experiments, or interpretations.\n*   *Bias:* While scientists strive for objectivity, personal biases can sometimes influence their work.\n*   *Technological Limitations:* Scientific progress is limited by the available technology. We can only study what we can measure and observe.\n\n### Importance of Understanding the Nature of Science\n\nUnderstanding the nature of science is crucial for:\n\n*   *Critical Thinking:* Allows you to evaluate scientific claims and information.\n*   *Informed Decision-Making:* Enables you to make informed decisions about science-related issues (e.g., vaccinations, climate change).\n*   *Appreciating the Process of Discovery:* Helps you understand how scientific knowledge is developed and refined."
+       
+          },
+          "Subtopic1.3": {
+            "title": "Scientific method",
+            "context": "Details the systematic approach to scientific inquiry including observation, hypothesis formation, experimentation, data analysis, and conclusion drawing with controlled variables and peer review."
+          },
+          "Subtopic1.4": {
+            "title": "Charles Darwin",
+            "context": "Explores Darwin's voyage on HMS Beagle, his observations of biodiversity, and development of the theory of evolution by natural selection with examples from Galápagos finches and other species."
+          },
+          "Subtopic1.5": {
+            "title": "After Darwin",
+            "context": "Discusses developments in evolutionary biology after Darwin including the rise of genetics, Mendel's work, the Modern Synthesis, and contemporary advances in molecular evolution and evo-devo."
+          },
+          "Subtopic1.6": {
+            "title": "Challenges to Darwin",
+            "context": "Examines historical and ongoing challenges to Darwin's theory including lack of direct evidence, unknown inheritance mechanisms, complex structures, and modern misconceptions about evolution."
+          }
+        }
+      },
+      "chapter2": {
+        "title": "The Nature of Molecules",
+        "subtopics": {
+          "Subtopic2.1": {
+            "title": "Matter",
+            "context": "Introduces the basic concept of matter, states of matter (solid, liquid, gas, plasma), elements, atoms as building blocks, and the distinction between molecules and compounds."
+          },
+          "Subtopic2.2": {
+            "title": "The atom",
+            "context": "Explains atomic structure including protons, neutrons, and electrons, atomic number and mass number, isotopes, ions, and electron shells with energy levels."
+          },
+          "Subtopic2.3": {
+            "title": "Mass and isotopes",
+            "context": "Covers atomic mass units, calculation of atomic mass, isotopes of the same element, radioactive isotopes, half-life, and applications in carbon dating and medicine."
+          },
+          "Subtopic2.4": {
+            "title": "Electrons",
+            "context": "Details electron shells and energy levels, electron configuration and stability, the octet rule, valence electrons, reactivity, and electron orbitals including s and p orbitals."
+          },
+          "Subtopic2.5": {
+            "title": "Chemical bonds",
+            "context": "Explains why atoms bond for stability, types of chemical bonds (ionic, covalent, hydrogen bonds), bond formation mechanisms, and their relative strengths and biological importance."
+          },
+          "Subtopic2.6": {
+            "title": "Chemical reactions",
+            "context": "Covers the basics of chemical reactions, reactants and products, chemical equations, types of reactions (synthesis, decomposition, replacement), energy changes, and factors affecting reaction rates."
+          },
+          "Subtopic2.7": {
+            "title": "Water",
+            "context": "Explores water's molecular structure, polarity, unique properties due to hydrogen bonding (cohesion, adhesion, high specific heat, expansion upon freezing), and its role as universal solvent."
+          },
+          "Subtopic2.8": {
+            "title": "Hydrogen bonding",
+            "context": "Detailed explanation of hydrogen bond formation between partially charged atoms, examples in water and biological molecules, and importance in DNA structure and protein folding."
+          }
+        }
+      }
+    }
+  },
+  {
+    "day2": {
+      "chapter3": {
+        "title": "The Chemical Building Blocks of Life",
+        "subtopics": {
+          "Subtopic3.1": {
+            "title": "Carbon",
+            "context": "Explores carbon's unique properties as the backbone of organic molecules, including its ability to form four covalent bonds and create complex molecular structures essential for life."
+          },
+          "Subtopic3.2": {
+            "title": "Carbohydrates",
+            "context": "Covers the structure and function of carbohydrates including monosaccharides, disaccharides, and polysaccharides, their role in energy storage and structural support in living organisms."
+          },
+          "Subtopic3.3": {
+            "title": "Stereoisomers",
+            "context": "Explains the concept of stereoisomers, structural and optical isomers, chirality in biological molecules, and how molecular shape affects biological function and activity."
+          },
+          "Subtopic3.4": {
+            "title": "Lipids",
+            "context": "Introduces lipids as diverse hydrophobic molecules including fats, oils, phospholipids, and steroids, their roles in energy storage, membrane structure, and signaling."
+          },
+          "Subtopic3.5": {
+            "title": "Fatty acids",
+            "context": "Details the structure of saturated and unsaturated fatty acids, their properties, role in lipid formation, and importance in membrane fluidity and energy metabolism."
+          },
+          "Subtopic3.6": {
+            "title": "Proteins",
+            "context": "Covers proteins as polymers of amino acids, their diverse functions including enzymes, structural proteins, transport proteins, and defense proteins in biological systems."
+          },
+          "Subtopic3.7": {
+            "title": "Amino acids",
+            "context": "Explains the structure of amino acids, the 20 standard amino acids, their properties (polar, nonpolar, charged), and how they link together to form proteins."
+          },
+          "Subtopic3.8": {
+            "title": "Structure",
+            "context": "Details the four levels of protein structure (primary, secondary, tertiary, quaternary), how amino acid sequence determines structure, and factors affecting protein folding."
+          },
+          "Subtopic3.9": {
+            "title": "Function",
+            "context": "Explores how protein structure relates to function, enzyme catalysis, protein-protein interactions, and how changes in structure can affect biological activity."
+          },
+          "Subtopic3.10": {
+            "title": "Hereditary (Genetic) information",
+            "context": "Introduces nucleic acids (DNA and RNA) as carriers of genetic information, their structure, and role in heredity and gene expression in living organisms."
+          },
+          "Subtopic3.11": {
+            "title": "RNA DNA origin",
+            "context": "Discusses the origin and evolution of nucleic acids, the RNA world hypothesis, and the transition from RNA-based to DNA-based genetic systems in early life."
+          }
+        }
+      },
+      "chapter4": {
+        "title": "Life: History and Origin",
+        "subtopics": {
+          "Subtopic4.1": {
+            "title": "Properties of life",
+            "context": "Reviews the fundamental properties that distinguish living from non-living matter, building on earlier concepts of life's characteristics in the context of origins."
+          },
+          "Subtopic4.2": {
+            "title": "Origin of life: 3 hypotheses",
+            "context": "Examines three major hypotheses for the origin of life: spontaneous generation, panspermia, and chemical evolution, evaluating evidence for each approach."
+          },
+          "Subtopic4.3": {
+            "title": "The early earth",
+            "context": "Describes conditions on early Earth including atmosphere composition, temperature, geological activity, and how these conditions may have influenced the emergence of life."
+          }
+        }
+      }
+    }
+  },
+  {
+    "day3": {
+      "chapter5": {
+        "title": "Life: History and Origin (Continued)",
+        "subtopics": {
+          "Subtopic5.1": {
+            "title": "Origin of cells",
+            "context": "Explores theories about how the first cells formed, including the role of lipid membranes, protocells, and the transition from chemical evolution to biological evolution."
+          },
+          "Subtopic5.2": {
+            "title": "The RNA world?",
+            "context": "Examines the RNA world hypothesis in detail, discussing RNA's dual role as genetic material and catalyst, and evidence supporting this model for early life."
+          },
+          "Subtopic5.3": {
+            "title": "The earliest cells",
+            "context": "Describes the characteristics of the first living cells, prokaryotic organization, metabolic pathways, and fossil evidence of early microbial life on Earth."
+          },
+          "Subtopic5.4": {
+            "title": "Major steps in evolution of life",
+            "context": "Outlines key evolutionary milestones including the origin of photosynthesis, eukaryotic cells, multicellularity, and major evolutionary transitions in life's history."
+          }
+        }
+      },
+      "chapter6": {
+        "title": "Cell Structure",
+        "subtopics": {
+          "Subtopic6.1": {
+            "title": "What is a cell?",
+            "context": "Defines cells as the basic units of life, introduces cell theory, and explains why cells are fundamental to understanding all biological processes and organization."
+          },
+          "Subtopic6.2": {
+            "title": "Concepts",
+            "context": "Covers fundamental cellular concepts including cell membrane, genetic material organization, and the relationship between structure and function at the cellular level."
+          },
+          "Subtopic6.3": {
+            "title": "Structure and function of the cell",
+            "context": "Explores how cellular structures relate to their functions, the importance of compartmentalization, and how cells maintain organization and carry out life processes."
+          },
+          "Subtopic6.4": {
+            "title": "Common characteristics of all the cells",
+            "context": "Identifies universal features shared by all cells including genetic material, ribosomes, cell membrane, and basic metabolic processes regardless of cell type."
+          },
+          "Subtopic6.5": {
+            "title": "History of cell knowledge",
+            "context": "Traces the development of cell biology from early microscopy observations to modern understanding, highlighting key discoveries and technological advances."
+          },
+          "Subtopic6.6": {
+            "title": "Cell Theory",
+            "context": "Details the three principles of cell theory: all living things are made of cells, cells are the basic unit of life, and all cells come from pre-existing cells."
+          },
+          "Subtopic6.7": {
+            "title": "Microscopes",
+            "context": "Explains different types of microscopes (light, electron), their capabilities and limitations, and how microscopy has advanced our understanding of cellular structure."
+          },
+          "Subtopic6.8": {
+            "title": "Cell size",
+            "context": "Discusses factors limiting cell size including surface area to volume ratio, diffusion limitations, and how these constraints influence cellular organization and function."
+          }
+        }
+      },
+      "chapter7": {
+        "title": "Structure of Eukaryotic Cells",
+        "subtopics": {
+          "Subtopic7.1": {
+            "title": "Structure of the nucleus",
+            "context": "Explores the nucleus as the control center of eukaryotic cells, its role in housing genetic material, and coordination of cellular activities and gene expression."
+          },
+          "Subtopic7.2": {
+            "title": "Nuclear envelope",
+            "context": "Details the structure and function of the nuclear envelope, nuclear pores, and how the nucleus communicates with the cytoplasm while maintaining separation of genetic material."
+          }
+        }
+      }
+    }
+  }
+]

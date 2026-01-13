@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+
+
+/* Custom Typography for AI Messages */
+.ai-prose h1, .ai-prose h2, .ai-prose h3 {
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ai-prose h1 { font-size: 1.25rem; }
+.ai-prose h2 { font-size: 1.1rem; }
+
+.ai-prose p {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.ai-prose ul {
+  list-style-type: disc;
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.ai-prose ol {
+  list-style-type: decimal;
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.ai-prose li {
+  margin-bottom: 0.25rem;
+}
+
+.ai-prose strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.ai-prose em {
+  font-style: italic;
+}
+
+/* For code snippets */
+.ai-prose code {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+
+
+
+/* Centers display equations and adds breathing room */
+.ai-prose .katex-display {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(79, 70, 229, 0.05); /* Light indigo tint */
+  border-radius: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

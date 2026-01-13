@@ -1,0 +1,54 @@
+[{
+  "day1": {
+    "chapter1": {
+      "title": "Introduction to Networking",
+      "subtopics": {
+        "Subtopic1.1": {
+          "title": "Types of Networks",
+          "context": "Covers LAN, WAN, and MAN with examples and their practical uses in modern communication systems."
+        },
+        "Subtopic1.2": {
+          "title": "Network Topologies",
+          "context": "Explains bus, ring, star, mesh, and hybrid topologies with diagrams and pros/cons of each."
+        },
+        "Subtopic1.3": {
+          "title": "Networking Devices",
+          "context": "Introduces routers, switches, hubs, and access points and their roles in building a network."
+        }
+      }
+    },
+    "chapter2": {
+      "title": "The OSI Model",
+      "subtopics": {
+        "Subtopic2.1": {
+          "title": "Overview of the OSI Model",
+          "context": "Discusses the need for OSI, its purpose, and how it helps in standardizing networking protocols."
+        },
+        "Subtopic2.2": {
+          "title": "Detailed OSI Layers",
+          "context": "Explains all 7 layers (Physical, Data Link, Network, Transport, Session, Presentation, Application) with real-world examples and their functions."
+        }
+      }
+    }
+  },
+  "day2": {
+    "chapter3": {
+      "title": "IP Addressing",
+      "subtopics": {
+        "Subtopic3.1": {
+          "title": "IPv4 and IPv6 Basics",
+          "context": "Explains the format, size, and differences between IPv4 and IPv6, with usage examples."
+        },
+        "Subtopic3.2": {
+          "title": "Subnetting and IP Classes",
+          "context": "Breaks down IP classes (A, B, C), subnetting techniques, and how they help in efficient IP management."
+        },
+        "Subtopic3.3": {
+          "title": "Public and Private IPs",
+          "context": "Describes the use of public and private IPs, NAT (Network Address Translation), and how routing uses IPs."
+        }
+      }
+    }
+  }
+}
+]
