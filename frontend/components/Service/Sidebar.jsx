@@ -19,6 +19,9 @@ export default function Sidebar({
           {metaData.subject}
         </p>
         <h2 className="text-lg font-bold truncate">{metaData.title}</h2>
+        <p className="text-xs opacity-75 mt-1">
+          {localSchedule.length} days • {getTotalSubtopics(localSchedule)} subtopics
+        </p>
       </div>
 
       <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
@@ -46,7 +49,12 @@ export default function Sidebar({
                     }`}
                   />
                 )}
-                <span className="font-bold text-sm">DAY {dayItem.day}</span>
+                <div className="text-left">
+                  <span className="font-bold text-sm block">DAY {dayItem.day}</span>
+                  <span className="text-xs text-gray-500">
+                    {dayItem.topics?.length || 0} topics
+                  </span>
+                </div>
               </div>
               {expandedDayIdx === dIdx ? (
                 <ChevronDown size={16} />
@@ -55,7 +63,7 @@ export default function Sidebar({
               )}
             </button>
 
-            {expandedDayIdx === dIdx && (
+            {expandedDayIdx === dIdx && dayItem.topics && (
               <div className="mt-2 ml-4 space-y-1 border-l-2 border-indigo-100 pl-2">
                 {dayItem.topics.map((topic, tIdx) => (
                   <div key={tIdx}>
@@ -67,9 +75,15 @@ export default function Sidebar({
                       }
                       className="w-full text-left px-3 py-2 text-sm font-semibold text-gray-600 flex justify-between items-center hover:text-indigo-600"
                     >
-                      <span className="truncate">{topic.title}</span>
+                      <span className="truncate">{topic.topic || topic.title}</span>
+                      <ChevronRight 
+                        size={14} 
+                        className={`transition-transform ${
+                          expandedTopicIdx === tIdx ? "rotate-90" : ""
+                        }`}
+                      />
                     </button>
-                    {expandedTopicIdx === tIdx && (
+                    {expandedTopicIdx === tIdx && topic.subtopics && (
                       <div className="ml-2 mt-1 space-y-1">
                         {topic.subtopics.map((sub, sIdx) => (
                           <button
@@ -82,7 +96,7 @@ export default function Sidebar({
                               setActiveQuiz(null);
                             }}
                             className={`w-full text-left px-3 py-2 text-xs transition-all rounded-lg flex items-center justify-between ${
-                              selectedSubtopic?._id === sub._id
+                              selectedSubtopic?.title === sub.title
                                 ? "bg-indigo-100 text-indigo-700 font-bold"
                                 : "text-gray-500 hover:bg-gray-100"
                             }`}
@@ -110,4 +124,17 @@ export default function Sidebar({
       </div>
     </div>
   );
+}
+
+// Helper function to calculate total subtopics
+function getTotalSubtopics(schedule) {
+  if (!schedule || !Array.isArray(schedule)) return 0;
+  
+  return schedule.reduce((total, day) => {
+    if (!day.topics) return total;
+    return total + day.topics.reduce((topicTotal, topic) => {
+      if (!topic.subtopics) return topicTotal;
+      return topicTotal + topic.subtopics.length;
+    }, 0);
+  }, 0);
 }

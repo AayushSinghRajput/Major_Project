@@ -22,14 +22,30 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   const handleUploadSuccess = (data) => {
+    console.log("Dashboard received data:", data); // Debug log
+    
     if (data) {
-      setAiPlan(data);
+      // Make sure we're passing the correct data structure
+      const planData = {
+        schedule: data.schedule || [], // The schedule array
+        days: data.days || 0,
+        pdf_hash: data.pdf_hash || "",
+        subject: data.subject || "General",
+        bookTitle: data.bookTitle || "PDF Document",
+        fileHash: data.pdf_hash || "",
+        _id: data._id || data.id || "temp-id"
+      };
+      
+      setAiPlan(planData);
       setShowServiceView(true);
     }
   };
 
   const renderContent = () => {
-    if (showServiceView) return <Service planData={aiPlan} />;
+    if (showServiceView && aiPlan) {
+      console.log("Rendering Service with planData:", aiPlan); // Debug log
+      return <Service planData={aiPlan} />;
+    }
 
     switch (activeTab) {
       case "dashboard":

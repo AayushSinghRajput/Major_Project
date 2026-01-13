@@ -8,7 +8,7 @@ import {
 } from "../lib/api";
 
 export function useServiceLogic(planData) {
-  const [localSchedule, setLocalSchedule] = useState(planData?.schedule || []);
+  const [localSchedule, setLocalSchedule] = useState([]);
   const [expandedDayIdx, setExpandedDayIdx] = useState(null);
   const [expandedTopicIdx, setExpandedTopicIdx] = useState(null);
   const [selectedSubtopic, setSelectedSubtopic] = useState(null);
@@ -18,85 +18,108 @@ export function useServiceLogic(planData) {
   const [isToggling, setIsToggling] = useState(false);
   const [hydratingDays, setHydratingDays] = useState({});
 
+  console.log("useServiceLogic - planData received:", planData); // Debug log
+
+  // Initialize schedule from planData
   useEffect(() => {
-    if (planData?.schedule) setLocalSchedule(planData.schedule);
+    if (planData?.schedule) {
+      console.log("Setting localSchedule:", planData.schedule); // Debug log
+      setLocalSchedule(planData.schedule);
+    } else {
+      console.log("No schedule in planData:", planData); // Debug log
+      setLocalSchedule([]);
+    }
   }, [planData]);
 
   const metaData = {
     subject: planData?.subject || "Study Material",
     title: planData?.bookTitle || "Your PDF",
-    fileHash: planData?.fileHash || "default_hash",
-    planId: planData?._id || planData?.id,
+    fileHash: planData?.pdf_hash || planData?.fileHash || "default_hash",
+    planId: planData?._id || planData?.id || "temp-id",
   };
+
+  console.log("metaData:", metaData); // Debug log
+  console.log("localSchedule:", localSchedule); // Debug log
 
   const handleDayExpand = async (idx, dayNum) => {
     const isExpanding = expandedDayIdx !== idx;
-    setExpandedDayIdx(isExpanding ? idx : null);
 
-    // If closing the accordion, stop here
-    if (!isExpanding) return;
+    if (isExpanding) {
+      setExpandedDayIdx(idx);
+      setExpandedTopicIdx(null);
+      setSelectedSubtopic(null);
 
-    const dayItem = localSchedule[idx];
-    const firstSubtopic = dayItem.topics[0]?.subtopics[0];
+      // If closing the previous day, collapse it first
+      if (expandedDayIdx !== null) {
+        const prevDay = localSchedule[expandedDayIdx]?.day;
+        setHydratingDays((prev) => ({ ...prev, [prevDay]: false }));
+      }
 
-    // Logic to check if we need to fetch images (hydration)
-    const needsHydration =
-      !firstSubtopic?.images ||
-      firstSubtopic.images.length === 0 ||
-      typeof firstSubtopic.images[0] === "string";
+      // Check if day exists in schedule
+      const dayItem = localSchedule[idx];
+      if (!dayItem?.topics || dayItem.topics.length === 0) {
+        toast.error("No topics found for this day");
+        return;
+      }
 
-    if (needsHydration && !hydratingDays[dayNum]) {
-      const toastId = `hydrate-${dayNum}`;
+      const firstSubtopic = dayItem.topics[0]?.subtopics?.[0];
 
-      try {
-        setHydratingDays((prev) => ({ ...prev, [dayNum]: true }));
+      // Logic to check if we need to fetch images (hydration)
+      const needsHydration =
+        !firstSubtopic?.images ||
+        firstSubtopic.images.length === 0 ||
+        typeof firstSubtopic.images[0] === "string";
 
-        // Updated loading message to show Gemini is active
-        toast.loading(` Generating educational diagrams...`, {
-          id: toastId,
-        });
-        // toast.loading(`Google is generating educational diagrams...`, {
-        //   id: toastId,
-        // });
+      if (needsHydration && !hydratingDays[dayNum] && metaData.planId) {
+        const toastId = `hydrate-${dayNum}`;
 
-        const res = await hydrateDayWithImages(metaData.planId, dayNum);
+        try {
+          setHydratingDays((prev) => ({ ...prev, [dayNum]: true }));
 
-        if (res.success) {
-          // Update the local schedule with the new data containing image objects
-          const updatedSchedule = localSchedule.map((d) =>
-            d.day === dayNum ? res.data : d
-          );
-          setLocalSchedule(updatedSchedule);
+          toast.loading(`Generating educational diagrams...`, {
+            id: toastId,
+          });
 
-          // FORCE UPDATE the currently viewed subtopic so the image appears instantly
-          if (selectedSubtopic && selectedSubtopic.currentDay === dayNum) {
-            for (let t of res.data.topics) {
-              const freshSubtopic = t.subtopics.find(
-                (s) => s.title === selectedSubtopic.title
-              );
-              if (freshSubtopic) {
-                setSelectedSubtopic({ ...freshSubtopic, currentDay: dayNum });
+          const res = await hydrateDayWithImages(metaData.planId, dayNum);
+
+          if (res.success) {
+            // Update the local schedule with the new data containing image objects
+            const updatedSchedule = localSchedule.map((d) =>
+              d.day === dayNum ? res.data : d
+            );
+            setLocalSchedule(updatedSchedule);
+
+            // Update the selected subtopic if it's from this day
+            if (selectedSubtopic && selectedSubtopic.currentDay === dayNum) {
+              for (let t of res.data.topics) {
+                const freshSubtopic = t.subtopics.find(
+                  (s) => s.title === selectedSubtopic.title
+                );
+                if (freshSubtopic) {
+                  setSelectedSubtopic({ ...freshSubtopic, currentDay: dayNum });
+                }
               }
             }
-          }
 
-          // toast.success("Google successfully created your diagrams!", {
-          //   id: toastId,
-          // });
-           toast.success("Generated successfully created your diagrams!", {
-            id: toastId,
-          });
-        } else {
-          toast.error("Google couldn't generate images right now.", {
-            id: toastId,
-          });
+            toast.success("Generated successfully created your diagrams!", {
+              id: toastId,
+            });
+          } else {
+            toast.error("Couldn't generate images right now.", {
+              id: toastId,
+            });
+          }
+        } catch (err) {
+          console.error("Hydration Error:", err);
+          toast.error("Connection error. Please try again.", { id: toastId });
+        } finally {
+          setHydratingDays((prev) => ({ ...prev, [dayNum]: false }));
         }
-      } catch (err) {
-        console.error("Hydration Error:", err);
-        toast.error("Connection error. Please try again.", { id: toastId });
-      } finally {
-        setHydratingDays((prev) => ({ ...prev, [dayNum]: false }));
       }
+    } else {
+      setExpandedDayIdx(null);
+      setExpandedTopicIdx(null);
+      setSelectedSubtopic(null);
     }
   };
 
@@ -126,8 +149,16 @@ export function useServiceLogic(planData) {
             : d
         );
         setLocalSchedule(updatedSchedule);
-        setSelectedSubtopic((prev) => ({ ...prev, completed: res.completed }));
-        toast.success(res.completed ? "Completed!" : "Reset");
+        setSelectedSubtopic(
+          (prev) =>
+            prev && {
+              ...prev,
+              completed: res.completed,
+            }
+        );
+        toast.success(
+          res.completed ? "Marked as completed!" : "Reset to incomplete"
+        );
       }
     } catch (err) {
       toast.error("Update failed");
@@ -141,19 +172,28 @@ export function useServiceLogic(planData) {
     if (!dayItem) return;
     setGeneratingMCQ(dayNum);
     setActiveQuiz(null);
+
     const combinedContext = dayItem.topics
       .map((t) =>
-        t.subtopics.map((s) => `${s.title}: ${s.description}`).join("\n")
+        t.subtopics
+          .map((s) => `${s.title}: ${s.content || s.description || ""}`)
+          .join("\n")
       )
       .join("\n\n");
+
     try {
       const res = await getMCQs(combinedContext, metaData.fileHash, dayNum);
       if (res.success) {
         setActiveQuiz({ day: dayNum, fileHash: metaData.fileHash });
         setSelectedSubtopic(null);
+        setExpandedDayIdx(null);
+        setExpandedTopicIdx(null);
+      } else {
+        toast.error("Failed to generate MCQs");
       }
     } catch (err) {
-      toast.error("Quiz failed");
+      console.error("MCQ Generation Error:", err);
+      toast.error("Quiz generation failed");
     } finally {
       setGeneratingMCQ(null);
     }
@@ -163,16 +203,22 @@ export function useServiceLogic(planData) {
     const dayItem = localSchedule.find((d) => d.day === dayNum);
     if (!dayItem) return;
     setGeneratingDay(dayNum);
+
     const combinedContext = dayItem.topics
       .map((t) =>
-        t.subtopics.map((s) => `${s.title}: ${s.description}`).join("\n")
+        t.subtopics
+          .map((s) => `${s.title}: ${s.content || s.description || ""}`)
+          .join("\n")
       )
       .join("\n\n");
+
     try {
       const res = await sendContext(combinedContext, metaData.fileHash, dayNum);
-      if (res.success) toast.success(`Note saved!`);
+      if (res.success) toast.success(`Note saved successfully!`);
+      else toast.error("Failed to save note");
     } catch (err) {
-      toast.error("Note failed");
+      console.error("Note Generation Error:", err);
+      toast.error("Note generation failed");
     } finally {
       setGeneratingDay(null);
     }
