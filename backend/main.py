@@ -16,8 +16,9 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
-app.include_router(content.router)
 app.include_router(pdf.router)
+app.include_router(content.router)
+
 
 
 @app.get("/")

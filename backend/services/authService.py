@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from utils.hashing import hash_password, verify_password
 from utils.jwt_token import create_access_token
-from config.config import db
+from db.config import db
 
 users_collection = db["users"]
 

@@ -1,88 +1,91 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query, status
+from fastapi import APIRouter, UploadFile, File, Query, HTTPException
+from utils.file_hash import compute_md5
+from services.study_scheduler import generate_study_schedule_from_toc
 from services.pdf_loader import extract_toc
-from services.study_scheduler import generate_study_schedule
-import os
-import hashlib
-import shutil
+from db.cloudinary import upload_pdf_to_cloudinary_bytes
+from db.config import db
+from models.Content import UploadScheduleResponse
 
 router = APIRouter(prefix="/api/study", tags=["Study Plan"])
 
-UPLOAD_DIR = "data/uploads"
 
-
-def compute_md5(file: UploadFile) -> str:
-    hash_md5 = hashlib.md5()
-    file.file.seek(0)
-
-    for chunk in iter(lambda: file.file.read(8192), b""):
-        hash_md5.update(chunk)
-
-    file.file.seek(0)
-    return hash_md5.hexdigest()
-
-
-@router.post("/upload-and-schedule")
+@router.post(
+    "/upload-and-schedule",
+    response_model=UploadScheduleResponse,
+    summary="Upload PDF and generate study schedule",
+    description="Upload a PDF file and specify number of study days. Returns structured study schedule."
+)
 async def upload_pdf_and_generate_schedule(
-    file: UploadFile = File(...),
-    days: int = Query(..., gt=0, description="Number of study days"),
+    file: UploadFile = File(..., description="PDF file to upload"),
+    days: int = Query(..., gt=0, description="Number of study days")
 ):
     try:
-        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        # 1️⃣ Read PDF ONCE
+        pdf_bytes = await file.read()
+        if not pdf_bytes:
+            raise HTTPException(status_code=400, detail="Uploaded file is empty")
 
-        pdf_hash = compute_md5(file)
+        # 2️⃣ Compute hash
+        pdf_hash = compute_md5(pdf_bytes)
 
-        pdf_path = os.path.join(UPLOAD_DIR, f"{pdf_hash}.pdf")
-        toc_path = os.path.join(UPLOAD_DIR, f"{pdf_hash}_toc.json")
-        schedule_path = os.path.join(
-            UPLOAD_DIR, f"{pdf_hash}_{days}_days_schedule.json"
-        )
+        # 3️⃣ Check if PDF already exists
+        pdf_doc = await db.pdfs.find_one({"pdf_hash": pdf_hash})
 
-        # Cache flags (IMPORTANT)
-        pdf_exists = os.path.exists(pdf_path)
-        toc_exists = os.path.exists(toc_path)
-        schedule_exists = os.path.exists(schedule_path)
+        if pdf_doc:
+            toc_data = pdf_doc["toc"]
+            pdf_url = pdf_doc["pdf_url"]
+            pdf_cached = True
+        else:
+            # 4️⃣ Upload PDF to Cloudinary using bytes
+            pdf_url = await upload_pdf_to_cloudinary_bytes(pdf_bytes)
 
-        # 1️⃣ Save PDF only if new
-        if not pdf_exists:
-            with open(pdf_path, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
+            # 5️⃣ Extract TOC
+            toc_data = extract_toc(pdf_bytes)
 
-        #  2. TOC
-        if not toc_exists:
-            toc_path = extract_toc(
-                file_path=pdf_path,
-                output_path=toc_path,
-            )
+            # 6️⃣ Store PDF metadata
+            await db.pdfs.insert_one({
+                "pdf_hash": pdf_hash,
+                "toc": toc_data,
+                "pdf_url": pdf_url
+            })
+            pdf_cached = False
 
-        # 3. Schedule
-        if not schedule_exists:
-            schedule_path = generate_study_schedule(
-                toc_file_path=toc_path,
-                total_days=days,
-                output_path=schedule_path,
-            )
-
-        # 4️⃣ Decide response meaning
-        fully_cached = pdf_exists and toc_exists and schedule_exists
-
-        return {
-            "status": "success",
-            "cached": fully_cached,
+        # 7️⃣ Check if schedule exists for given days
+        schedule_doc = await db.schedules.find_one({
             "pdf_hash": pdf_hash,
-            "original_filename": file.filename,
-            "days": days,
-            "pdf_path": pdf_path,
-            "toc_path": toc_path,
-            "schedule_path": schedule_path,
-            "details": {
-                "pdf_reused": pdf_exists,
-                "toc_reused": toc_exists,
-                "schedule_reused": schedule_exists,
-            },
-        }
+            "days": days
+        })
 
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e),
+        if schedule_doc:
+            schedule = schedule_doc["schedule"]
+            schedule_cached = True
+        else:
+            # 8️⃣ Generate schedule
+            schedule = generate_study_schedule_from_toc(
+                toc_data=toc_data,
+                total_days=days
+            )
+
+            # 9️⃣ Save schedule
+            await db.schedules.update_one(
+                {"pdf_hash": pdf_hash, "days": days},
+                {"$set": {"schedule": schedule}},
+                upsert=True
+            )
+            schedule_cached = False
+
+        # 🔟 Return response
+        return UploadScheduleResponse(
+            status="success",
+            status_code=200,
+            message="Study schedule generated successfully",
+            pdf_hash=pdf_hash,
+            days=days,
+            schedule=schedule,
+            cached=pdf_cached and schedule_cached
         )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
