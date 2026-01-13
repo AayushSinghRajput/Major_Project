@@ -5,6 +5,10 @@ class Settings(BaseSettings):
     # LLM providers
     GOOGLE_API_KEY: str | None = None
     GROQ_API_KEY: str | None = None
+    AZURE_OPENAI_API_KEY: str | None = None
+    AZURE_OPENAI_ENDPOINT: str | None = None
+    AZURE_OPENAI_DEPLOYMENT: str | None = None
+    AZURE_OPENAI_API_VERSION: str | None = None
 
     # Database & auth
     MONGO_URI: str

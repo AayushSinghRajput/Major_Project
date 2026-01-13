@@ -13,3 +13,10 @@ langchain-text-splitters
 langchain-community
 python-multipart
 langchain-groq
+torch
+transformers
+peft
+numpy
+pydantic
+pandas
+langchain_openai

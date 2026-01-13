@@ -4,4 +4,8 @@ backend/.env
 # Ignore Python cache files
 __pycache__/
 *.py[cod]
-
+ml_model/
+data/
+.venv
+env/
+venv/   
