@@ -1,10 +1,11 @@
-from fastapi import APIRouter, UploadFile, File, Query, HTTPException
+from fastapi import APIRouter, UploadFile, File, Query, HTTPException, Depends, Response
 from utils.file_hash import compute_md5
 from services.study_scheduler import generate_study_schedule_from_toc
 from services.pdf_loader import extract_toc
 from db.cloudinary import upload_pdf_to_cloudinary_bytes
 from db.config import db
 from models.Content import UploadScheduleResponse
+from middleware.auth_middleware import get_current_user
 
 router = APIRouter(prefix="/api/study", tags=["Study Plan"])
 
@@ -16,19 +17,24 @@ router = APIRouter(prefix="/api/study", tags=["Study Plan"])
     description="Upload a PDF file and specify number of study days. Returns structured study schedule."
 )
 async def upload_pdf_and_generate_schedule(
+    response: Response,
     file: UploadFile = File(..., description="PDF file to upload"),
-    days: int = Query(..., gt=0, description="Number of study days")
+    days: int = Query(..., gt=0, description="Number of study days"),
+    current_user=Depends(get_current_user)  # ✅ Auth middleware
 ):
+    """
+    Protected route: only logged-in users can upload PDFs and generate study schedule.
+    """
     try:
-        # 1️⃣ Read PDF ONCE
+        # 1️⃣ Read PDF bytes
         pdf_bytes = await file.read()
         if not pdf_bytes:
             raise HTTPException(status_code=400, detail="Uploaded file is empty")
 
-        # 2️⃣ Compute hash
+        # 2️⃣ Compute MD5 hash
         pdf_hash = compute_md5(pdf_bytes)
 
-        # 3️⃣ Check if PDF already exists
+        # 3️⃣ Check if PDF already exists in DB
         pdf_doc = await db.pdfs.find_one({"pdf_hash": pdf_hash})
 
         if pdf_doc:
@@ -36,13 +42,13 @@ async def upload_pdf_and_generate_schedule(
             pdf_url = pdf_doc["pdf_url"]
             pdf_cached = True
         else:
-            # 4️⃣ Upload PDF to Cloudinary using bytes
+            # 4️⃣ Upload PDF to Cloudinary
             pdf_url = await upload_pdf_to_cloudinary_bytes(pdf_bytes)
 
             # 5️⃣ Extract TOC
             toc_data = extract_toc(pdf_bytes)
 
-            # 6️⃣ Store PDF metadata
+            # 6️⃣ Save PDF metadata
             await db.pdfs.insert_one({
                 "pdf_hash": pdf_hash,
                 "toc": toc_data,
@@ -50,7 +56,7 @@ async def upload_pdf_and_generate_schedule(
             })
             pdf_cached = False
 
-        # 7️⃣ Check if schedule exists for given days
+        # 7️⃣ Check if schedule already exists for this PDF & days
         schedule_doc = await db.schedules.find_one({
             "pdf_hash": pdf_hash,
             "days": days
@@ -74,7 +80,7 @@ async def upload_pdf_and_generate_schedule(
             )
             schedule_cached = False
 
-        # 🔟 Return response
+        # 🔟 Return response aligned with frontend
         return UploadScheduleResponse(
             status="success",
             status_code=200,
