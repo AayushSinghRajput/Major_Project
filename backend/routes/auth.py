@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Body
-from services.authService import register_user, login_user, logout_user
+from backend.services.auth_service import register_user, login_user, logout_user
 from middleware.authMiddleware import get_current_user
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
